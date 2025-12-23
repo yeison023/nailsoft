@@ -7,6 +7,8 @@ from app.models.user import User
 from app.models.reservation import Reservation
 from app.extensions import db
 from sqlalchemy import extract, func
+from werkzeug.security import generate_password_hash
+
 
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -102,17 +104,22 @@ def usuarios():
 @role_required(RoleEnum.ADMIN)
 def nuevo_usuario():
     if request.method == 'POST':
+        password_plana = request.form['password']
+
         user = User(
             name=request.form['name'],
             email=request.form['email'],
-            password=request.form['password'],  # recuerda hashear la contraseña
+            password=generate_password_hash(password_plana),
             role=request.form['role'],
             cellphone=request.form['cellphone'],
         )
+
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('admin.usuarios'))
+
     return render_template('admin/nuevo_usuario.html')
+
 
 
 @bp.route('/usuarios/editar/<int:id>', methods=['GET', 'POST'])

@@ -19,6 +19,7 @@
                     <th>Servicio</th>
                     <th>Precio</th>
                     <th>Acciones</th>
+                    <th>Ubicación</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +30,11 @@
                     <td>{{ r.client.name }}</td>
                     <td>{{ r.manicurista.name }}</td>
                     <td>{{ r.service.nombre }}</td>
-                    <td>${{ "{:,.0f}".format(r.service.precio) }}</td>
+                    <td>{% if r.location == 'SPA' %}
+                                    {{ r.service.precio }}</td>
+                                    {% else %}
+                                    ${{ "{:,.0f}".format(r.service.precio+20000) }}</td>
+                                    {% endif %}
                     <td>
                         <a href="{{ url_for('admin.editar_reserva', id=r.id) }}" class="btn btn-outline-primary btn-sm btn-edit">✏️ Editar</a>
                         <a href="{{ url_for('admin.eliminar_reserva', id=r.id) }}" 
@@ -42,7 +47,7 @@
                         {% else %}
                             <span class="badge bg-secondary">A domicilio</span><br>
                             <small>{{ r.address }}</small>
-                            <small class="text-muted">+ $20,000 domicilio</small>
+                            <small class="text-muted"></small>
                         {% endif %}
                     </td>
                 </tr>
