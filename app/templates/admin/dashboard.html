@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4" style="color:#d147a3;">📊 Panel de Administración</h1>
+
+    <!-- Estadísticas rápidas -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card shadow-lg rounded-4 p-4 stat-card">
+                <h4>👥 Usuarios</h4>
+                <p class="display-6">{{ total_users }}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg rounded-4 p-4 stat-card">
+                <h4>💅 Servicios</h4>
+                <p class="display-6">{{ total_services }}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg rounded-4 p-4 stat-card">
+                <h4>📅 Reservas</h4>
+                <p class="display-6">{{ total_reservations }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación interna -->
+    <div class="text-center mb-5">
+        <a href="{{ url_for('admin.servicios') }}" class="btn btn-outline-primary me-2">Servicios</a>
+        <a href="{{ url_for('admin.usuarios') }}" class="btn btn-outline-primary me-2">Usuarios</a>
+        <a href="{{ url_for('admin.reservas') }}" class="btn btn-outline-primary">Reservas</a>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card shadow-lg rounded-4 p-4 chart-card">
+                <h5 class="text-center mb-3">Servicios atendidos por mes</h5>
+                <canvas id="servicesChart"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-lg rounded-4 p-4 chart-card">
+                <h5 class="text-center mb-3">Ingresos por mes</h5>
+                <canvas id="incomeChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Datos de ejemplo que debes pasar desde Flask
+    const months = {{ months|tojson }};
+    const servicesData = {{ services_per_month|tojson }};
+    const incomeData = {{ income_per_month|tojson }};
+
+    // Chart servicios
+    new Chart(document.getElementById('servicesChart'), {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Servicios',
+                data: servicesData,
+                backgroundColor: 'rgba(209, 71, 163, 0.7)',
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+
+    // Chart ingresos
+    new Chart(document.getElementById('incomeChart'), {
+        type: 'line',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Ingresos (COP)',
+                data: incomeData,
+                fill: true,
+                backgroundColor: 'rgba(241, 123, 177,0.2)',
+                borderColor: 'rgba(209, 71, 163, 1)',
+                tension: 0.3,
+                borderWidth: 3,
+                pointBackgroundColor: 'rgba(209, 71, 163, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>
+{% endblock %}

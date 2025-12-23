@@ -1,0 +1,709 @@
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  thead {
+    background-color: #2c3e50;
+    color: #fff;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    text-align: left;
+  }
+
+  th {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f5f6fa;
+  }
+
+  tbody tr:hover {
+    background-color: #eef2f7;
+  }
+
+  .actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn {
+    padding: 6px 10px;
+    font-size: 13px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .btn-edit {
+    background-color: #3498db;
+  }
+
+  .btn-delete {
+    background-color: #e74c3c;
+  }
+
+  .btn-delete:hover {
+    background-color: #c0392b;
+  }
+
+  .btn-edit:hover {
+    background-color: #2980b9;
+  }
+/* Fondo de la página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff0f5; /* pastel lila */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor del formulario */
+.form-container {
+    background-color: #ffe4e1; /* rosa pastel */
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+
+/* Hover suave */
+.form-container:hover {
+    transform: translateY(-5px);
+}
+
+/* Título */
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #d147a3; /* morado pastel */
+}
+
+/* Mensajes */
+.messages p {
+    background-color: #ffd1dc;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Formulario */
+.reservation-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.reservation-form input,
+.reservation-form select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #dcb2d1;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+/* Animación al enfocar */
+.reservation-form input:focus,
+.reservation-form select:focus {
+    border-color: #d147a3;
+    box-shadow: 0 0 8px rgba(209, 71, 163, 0.4);
+}
+
+/* Botón */
+.btn {
+    width: 100%;
+    background-color: #d147a3;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #b2368a;
+    transform: scale(1.05);
+}
+/* Navbar */
+.navbar {
+    background: rgba(255, 228, 225, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.navbar .nav-link {
+    color: #d147a3 !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+    color: #b2368a !important;
+}
+
+/* Secciones */
+section {
+    scroll-margin-top: 70px; /* Para navbar sticky */
+}
+
+/* Cards de servicios */
+.service-card {
+    background: #ffe4e1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(209,71,163,0.3);
+}
+
+/* Botones */
+.btn-primary {
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(209,71,163,0.3);
+}
+
+/* Tarjeta login */
+.login-card {
+    background: linear-gradient(135deg, #ffe4e1, #ffd1dc);
+    padding: 30px 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* Iconos dentro de inputs */
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+
+/* Inputs con espacio para icono */
+.form-control.ps-5 {
+    padding-left: 2.5rem !important;
+    border-radius: 12px;
+    border: 1px solid #dcb2d1;
+    transition: all 0.3s ease;
+}
+
+/* Enfoque animado */
+.form-control:focus {
+    border-color: #d147a3;
+    box-shadow: 0 0 10px rgba(209, 71, 163, 0.3);
+    outline: none;
+}
+
+/* Botón login */
+.btn-login {
+    background: linear-gradient(45deg, #d147a3, #e17bb1);
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-login:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(209,71,163,0.4);
+}
+
+/* Tarjeta registro */
+.register-card {
+    background: linear-gradient(135deg, #ffe4e1, #ffd1dc);
+    padding: 30px 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* Iconos dentro de inputs */
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+
+/* Inputs con espacio para icono */
+.form-control.ps-5 {
+    padding-left: 2.5rem !important;
+    border-radius: 12px;
+    border: 1px solid #dcb2d1;
+    transition: all 0.3s ease;
+}
+
+/* Enfoque animado */
+.form-control:focus {
+    border-color: #d147a3;
+    box-shadow: 0 0 10px rgba(209, 71, 163, 0.3);
+    outline: none;
+}
+
+/* Botón registro */
+.btn-register {
+    background: linear-gradient(45deg, #d147a3, #e17bb1);
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-register:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(209,71,163,0.4);
+}
+
+/* Alertas */
+.alert {
+    border-radius: 12px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .register-card {
+        padding: 20px 15px;
+    }
+}
+
+/* Tarjeta Mis Reservas */
+.reservas-card {
+    background: linear-gradient(135deg, #ffe4e1, #ffd1dc);
+    padding: 25px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reservas-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* Tabla */
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table thead {
+    background-color: #f5b7cc;
+    color: #fff;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(209,71,163,0.1);
+    transition: background-color 0.3s ease;
+}
+
+/* Badges de estado */
+.badge {
+    font-weight: 500;
+    padding: 0.5em 0.8em;
+    border-radius: 12px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .reservas-card {
+        padding: 20px 15px;
+    }
+}
+/* Tarjetas estadísticas */
+.stat-card {
+    background: linear-gradient(135deg, #ffe4e1, #ffd1dc);
+    text-align: center;
+    padding: 25px;
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* Tarjetas gráficos */
+.chart-card {
+    background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Botones navegación */
+.btn-outline-primary {
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(209,71,163,0.3);
+}
+
+/* Tipografía general */
+h1, h4, h5 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stat-card, .chart-card {
+        margin-bottom: 20px;
+    }
+}
+/* Tarjetas de servicios */
+.service-card {
+    background: linear-gradient(135deg, #ffe4e1, #fff0f5);
+    padding: 20px;
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(209,71,163,0.2);
+}
+
+/* Botones */
+.btn-add, .btn-outline-primary, .btn-outline-danger {
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-add:hover, .btn-outline-primary:hover, .btn-outline-danger:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(209,71,163,0.3);
+}
+
+/* Card text */
+.card-text {
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .service-card {
+        padding: 15px;
+    }
+}
+.service-edit-card {
+    background: linear-gradient(135deg, #ffe4e1, #fff0f5);
+    padding: 30px 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-edit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(209,71,163,0.15);
+}
+
+.form-control {
+    border-radius: 12px;
+    border: 1px solid #dcb2d1;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #d147a3;
+    box-shadow: 0 0 10px rgba(209,71,163,0.3);
+    outline: none;
+}
+
+.btn-save {
+    background: linear-gradient(45deg, #d147a3, #e17bb1);
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-save:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(209,71,163,0.4);
+}
+
+.btn-cancel {
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-cancel:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(209,71,163,0.2);
+}
+
+/* Tabla de usuarios */
+.user-table {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #ffe4e1, #fff0f5);
+}
+
+.user-table thead {
+    background-color: #f5b7cc;
+    color: #fff;
+}
+
+.user-table tbody tr:hover {
+    background-color: rgba(209,71,163,0.1);
+    transition: background-color 0.3s ease;
+}
+
+/* Badges de rol */
+.badge {
+    font-weight: 500;
+    padding: 0.5em 0.8em;
+    border-radius: 12px;
+}
+
+/* Botones */
+.btn-add, .btn-outline-primary, .btn-outline-danger {
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-add:hover, .btn-outline-primary:hover, .btn-outline-danger:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(209,71,163,0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .user-table {
+        font-size: 0.9rem;
+    }
+}
+
+.user-card {
+    background: linear-gradient(135deg, #ffe4e1, #fff0f5);
+    padding: 30px 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(209,71,163,0.15);
+}
+
+.form-control {
+    border-radius: 12px;
+    border: 1px solid #dcb2d1;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #d147a3;
+    box-shadow: 0 0 10px rgba(209,71,163,0.3);
+    outline: none;
+}
+
+.btn-save {
+    background: linear-gradient(45deg, #d147a3, #e17bb1);
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-save:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(209,71,163,0.4);
+}
+
+.btn-cancel {
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-cancel:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(209,71,163,0.2);
+}
+
+/* Tabla de reservas */
+.reservation-table {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+}
+
+.reservation-table thead {
+    background-color: #f5b7cc;
+    color: #fff;
+}
+
+.reservation-table tbody tr:hover {
+    background-color: rgba(209,71,163,0.1);
+    transition: background-color 0.3s ease;
+}
+
+/* Botones de acción */
+.btn-edit, .btn-delete {
+    border-radius: 12px;
+    padding: 5px 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-edit:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+}
+
+.btn-delete:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(220,53,69,0.3);
+}
+
+/* Total fila */
+tfoot tr td {
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .reservation-table {
+        font-size: 0.9rem;
+    }
+}
+
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff0f5; /* Rosa pastel suave */
+    border-radius: 10px;
+}
+
+/* Títulos */
+h2 {
+    text-align: center;
+    color: #d63384; /* Rosa vibrante */
+    margin-bottom: 20px;
+}
+
+/* Tabla */
+.table {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.table th, .table td {
+    vertical-align: middle !important;
+    text-align: center;
+    padding: 12px 10px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #ffe6f0; /* Rosa muy suave */
+}
+
+/* Badges personalizados */
+.badge {
+    font-weight: 500;
+    padding: 0.45em 0.8em;
+    font-size: 0.85rem;
+}
+
+/* Estado de reserva */
+.badge.bg-warning { background-color: #ffe58f; color: #333; }
+.badge.bg-info { background-color: #bae7ff; color: #0050b3; }
+.badge.bg-danger { background-color: #ffa39e; color: #a8071a; }
+.badge.bg-success { background-color: #b7eb8f; color: #237804; }
+.badge.bg-secondary { background-color: #d9d9d9; color: #595959; }
+
+/* Botones de acciones */
+.btn-outline-secondary,
+.btn-outline-primary,
+.btn-outline-danger,
+.btn-outline-success {
+    border-radius: 5px;
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-outline-secondary:hover { background-color: #e6e6e6; color: #333; }
+.btn-outline-primary:hover { background-color: #91d5ff; color: #0050b3; }
+.btn-outline-danger:hover { background-color: #ffa39e; color: #a8071a; }
+.btn-outline-success:hover { background-color: #b7eb8f; color: #237804; }
+
+/* Alertas */
+.alert-info {
+    background-color: #bae7ff;
+    color: #0050b3;
+    border-radius: 8px;
+    padding: 15px;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table th, .table td {
+        padding: 8px 5px;
+        font-size: 0.85rem;
+    }
+
+    .btn-outline-secondary,
+    .btn-outline-primary,
+    .btn-outline-danger,
+    .btn-outline-success {
+        font-size: 0.75rem;
+        padding: 3px 6px;
+    }
+}

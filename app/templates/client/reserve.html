@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7 col-sm-10">
+            <div class="card p-4 shadow-lg rounded-4 form-card">
+                <div class="card p-4 shadow-lg rounded-4 form-card">
+                  <h2 class="text-center mb-4" style="color:#d147a3;">💅 Reservar cita para {{ current_user.name }}</h2>
+                  {% with messages = get_flashed_messages() %} 
+                    {% if messages %}
+                      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {% for msg in messages %}
+                         <p class="mb-0">{{ msg }}</p>
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endif %}
+                  {% endwith %}
+
+                <form method="POST" class="reservation-form">
+                    <!-- Fecha -->
+                    <div class="mb-3 position-relative">
+                        <label for="date" class="form-label">Fecha</label>
+                        <span class="input-icon">📅</span>
+                        <input type="date" class="form-control ps-5" name="date" id="date" required oninput="validateDay(this)">
+                    </div>
+
+                    <!-- Hora -->
+                    <div class="mb-3 position-relative">
+                        <label for="time" class="form-label">Hora</label>
+                        <span class="input-icon">⏰</span>
+                        <input type="time" class="form-control ps-5" name="time" id="time" min="07:00" max="20:00" required>
+                    </div>
+
+                    <!-- Manicurista -->
+                    <div class="mb-3 position-relative">
+                        <label for="manicurist" class="form-label">Manicurista</label>
+                        <span class="input-icon">🧑‍🔧</span>
+                        <select class="form-select ps-5" name="manicurist" id="manicurist" required>
+                            {% for m in manicurists %}
+                                <option value="{{ m.id }}">{{ m.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Servicio -->
+                    <div class="mb-4 position-relative">
+                        <label for="service" class="form-label">Servicio</label>
+                        <span class="input-icon">💖</span>
+                        <select class="form-select ps-5" name="service" id="service" required>
+                            {% for s in services %}
+                                <option value="{{ s.id }}">{{ s.nombre }} ({{ s.duracion }} min) {{ s.precio|currency }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Lugar del servicio</label>
+                        <select class="form-select" id="location" name="location" required onchange="toggleAddress()">
+                            <option value="SPA" selected>En el Spa</option>
+                            <option value="DOMICILIO">A domicilio</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3" id="address-div" style="display:none;">
+                        <label for="address" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Dirección del domicilio">
+                        <small class="text-muted">El servicio a domicilio tiene un costo adicional de $20.000.</small>
+                    </div>
+
+                    <script>
+                        function toggleAddress() {
+                        const location = document.getElementById('location').value;
+                        const addressDiv = document.getElementById('address-div');
+                        if(location === 'DOMICILIO'){
+                            addressDiv.style.display = 'block';
+                        } 
+                        else {
+                        addressDiv.style.display = 'none';
+                            document.getElementById('address').value = '';
+                        }
+                        }
+                    </script>       
+
+                    <button type="submit" class="btn btn-primary w-100 btn-reserve">Reservar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function validateDay(input) {
+    const date = new Date(input.value);
+    if (date.getDay() === 0) {
+        alert("❌ No se permiten reservas los domingos");
+        input.value = "";
+    }
+}
+</script>
+{% endblock %}

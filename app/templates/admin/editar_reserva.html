@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Reserva{% endblock %}
+
+{% block content %}
+<h2>✏️ Editar Reserva</h2>
+
+<form method="POST">
+  <label>Fecha</label><br>
+  <input type="date" name="date" value="{{ reserva.date }}" required><br><br>
+
+  <label>Hora inicio</label><br>
+  <input type="time" name="start_time" value="{{ reserva.start_time }}" required><br><br>
+
+  <label>Hora fin</label><br>
+  <input type="time" name="end_time" value="{{ reserva.end_time }}" required><br><br>
+
+  <label>Manicurista</label><br>
+  <select name="manicurist" required>
+    {% for m in manicurists %}
+      <option value="{{ m.id }}" {% if m.id == reserva.manicurista_id %}selected{% endif %}>
+        {{ m.name }}
+      </option>
+    {% endfor %}
+  </select><br><br>
+
+  <label>Servicio</label><br>
+  <select name="service" required>
+    {% for s in services %}
+      <option value="{{ s.id }}" {% if s.id == reserva.service_id %}selected{% endif %}>
+        {{ s.nombre }}
+      </option>
+    {% endfor %}
+  </select><br><br>
+
+  <button type="submit">💾 Guardar cambios</button>
+  <a href="{{ url_for('admin.reservas') }}">Cancelar</a>
+</form>
+{% endblock %}

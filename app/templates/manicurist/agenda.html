@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<div class="container my-4">
+    <h2 class="mb-4 text-center">📅 Mi Agenda</h2>
+
+    {% if reservations %}
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-hover align-middle text-center">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Servicio</th>
+                    <th scope="col">Locación</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in reservations %}
+                <tr>
+                    <td>{{ r.date.strftime('%d/%m/%Y') }}</td>
+                    <td>{{ r.time.strftime('%H:%M') }}</td>
+                    <td>{{ r.client.name }}</td>
+                    <td>{{ r.service.nombre }}</td>
+                    <td>
+                        {% if r.location == 'SPA' %}
+                            <span class="badge bg-info text-dark">En el Spa</span>
+                        {% else %}
+                            <span class="badge bg-secondary">A domicilio</span>
+                            <br>
+                            <small class="text-muted">{{ r.address }}</small>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if r.location == 'SPA' %}
+                            ${{ r.service.precio | round(0) }}
+                        {% else %}
+                            ${{ (r.service.precio + 20000) | round(0) }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if r.status.name == 'PENDIENTE' %}
+                            <span class="badge bg-warning text-dark">{{ r.status.name|capitalize }}</span>
+                        {% elif r.status.name == 'CONFIRMADO' %}
+                            <span class="badge bg-primary text-white">{{ r.status.name|capitalize }}</span>
+                        {% elif r.status.name == 'RECHAZADO' %}
+                            <span class="badge bg-danger">{{ r.status.name|capitalize }}</span>
+                        {% elif r.status.name == 'FINALIZADO' %}
+                            <span class="badge bg-success">{{ r.status.name|capitalize }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="d-flex flex-wrap justify-content-center gap-1">
+                            <a href="{{ url_for('manicurist.cambiar_estado', id=r.id, estado='pendiente') }}" class="btn btn-sm btn-outline-secondary" title="Pendiente">💰</a>
+                            <a href="{{ url_for('manicurist.cambiar_estado', id=r.id, estado='confirmado') }}" class="btn btn-sm btn-outline-primary" title="Confirmado">✅</a>
+                            <a href="{{ url_for('manicurist.cambiar_estado', id=r.id, estado='rechazado') }}" class="btn btn-sm btn-outline-danger" title="Rechazado">❌</a>
+                            <a href="{{ url_for('manicurist.cambiar_estado', id=r.id, estado='finalizado') }}" class="btn btn-sm btn-outline-success" title="Finalizado">🏁</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center" role="alert">
+        No tienes reservas asignadas.
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5 col-sm-10">
+            <div class="card shadow-lg rounded-4 p-4 register-card">
+                <h2 class="text-center mb-4" style="color:#d147a3;">📝 Registro de Cliente</h2>
+
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      {% for msg in messages %}
+                        <p class="mb-0">{{ msg }}</p>
+                      {% endfor %}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  {% endif %}
+                {% endwith %}
+
+                <form method="POST" class="register-form">
+                    <div class="mb-3 position-relative">
+                        <label for="name" class="form-label">Nombre completo</label>
+                        <span class="input-icon">👤</span>
+                        <input type="text" class="form-control ps-5" name="name" id="name" required placeholder="Tu nombre completo">
+                    </div>
+
+                    <div class="mb-3 position-relative">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <span class="input-icon">📧</span>
+                        <input type="email" class="form-control ps-5" name="email" id="email" required placeholder="ejemplo@correo.com">
+                    </div>
+
+                    <div class="mb-3 position-relative">
+                        <label for="phone" class="form-label">Teléfono</label>
+                        <span class="input-icon">☎️</span>
+                        <input type="tel" class="form-control ps-5" name="phone" id="phone" required placeholder="+57 300 123 4567">
+                    </div>
+
+                    <div class="mb-3 position-relative">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <span class="input-icon">🔑</span>
+                        <input type="password" class="form-control ps-5" name="password" id="password" required placeholder="********">
+                    </div>
+
+                    <div class="mb-4 position-relative">
+                        <label for="confirm_password" class="form-label">Confirmar contraseña</label>
+                        <span class="input-icon">🔒</span>
+                        <input type="password" class="form-control ps-5" name="confirm_password" id="confirm_password" required placeholder="********">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 btn-register">Registrarse</button>
+                </form>
+
+                <p class="text-center mt-3">
+                    ¿Ya tienes cuenta? 
+                    <a href="{{ url_for('auth.login') }}" style="color:#d147a3; font-weight:500;">Inicia sesión</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

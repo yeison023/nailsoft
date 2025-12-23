@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">💅 NailSoft</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#nosotros">Nosotros</a></li>
+        <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+        <li class="nav-item"><a class="nav-link" href="#reservas">Reservas</a></li>
+      </ul>
+      <div class="ms-3">
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-primary btn-sm">Cerrar sesión</a>
+        {% else %}
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a href="{{ url_for('auth.login') }}" class="btn btn-outline-primary btn-sm">Iniciar sesión</a></li>
+          <li class="nav-item"><a href="{{ url_for('auth.register') }}" class="btn btn-outline-primary btn-sm">Registro</a></li>
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Sección Inicio -->
+<section id="inicio" class="py-5 text-center" style="background: linear-gradient(135deg, #ffe4e1, #fff0f5);">
+  <div class="container">
+    <h1 class="display-4">Bienvenidos a NailSoft</h1>
+    <p class="lead mt-3">Tu spa de uñas favorito. Relájate y disfruta de un servicio de calidad.</p>
+    <a href="#reservas" class="btn btn-lg btn-primary mt-3" style="background-color:#d147a3; border:none;">Reservar Ahora</a>
+  </div>
+</section>
+
+<!-- Sección Nosotros -->
+<section id="nosotros" class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4" style="color:#d147a3;">Nosotros</h2>
+    <p class="text-center mx-auto" style="max-width: 700px;">
+      En NailSoft nos apasiona el cuidado y la belleza de tus uñas. Contamos con profesionales certificadas y un ambiente relajante para que tu experiencia sea única.
+    </p>
+  </div>
+</section>
+
+<!-- Sección Servicios -->
+<section id="servicios" class="py-5" style="background: #fff0f5;">
+  <div class="container">
+    <h2 class="text-center mb-4" style="color:#d147a3;">Servicios</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card shadow-sm rounded-4 p-3 h-100 service-card">
+          <h5 class="card-title">Manicura Clásica</h5>
+          <p class="card-text">Limpieza, limado y esmalte con acabado profesional.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm rounded-4 p-3 h-100 service-card">
+          <h5 class="card-title">Manicura Spa</h5>
+          <p class="card-text">Tratamiento hidratante y relajante con masaje incluido.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm rounded-4 p-3 h-100 service-card">
+          <h5 class="card-title">Decoración de Uñas</h5>
+          <p class="card-text">Diseños personalizados y tendencia para tus uñas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Reservas -->
+<section id="reservas" class="py-5">
+  <div class="container text-center">
+    <h2 class="mb-4" style="color:#d147a3;">Reserva tu cita</h2>
+    <p class="mb-3">Elige tu fecha y hora, y nuestras expertas te atenderán con mucho cuidado.</p>
+    {% if current_user.is_authenticated and current_user.role.name == 'CLIENTE' %}
+      <a href="{{ url_for('client.reserve') }}" class="btn btn-lg btn-primary" style="background-color:#d147a3; border:none;">Reservar Ahora</a>
+    {% else %}
+      <a href="{{ url_for('auth.login') }}" class="btn btn-lg btn-primary" style="background-color:#d147a3; border:none;">Iniciar sesión para reservar</a>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Servicio{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-10">
+            <div class="card shadow-lg rounded-4 p-4 service-edit-card">
+                <h2 class="text-center mb-4" style="color:#d147a3;">✏️ Editar Servicio</h2>
+
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      {% for msg in messages %}
+                        <p class="mb-0">{{ msg }}</p>
+                      {% endfor %}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  {% endif %}
+                {% endwith %}
+
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre del Servicio</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre" required value="{{ servicio.nombre }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Precio (COP)</label>
+                        <input type="number" class="form-control" name="precio" id="precio" required value="{{ servicio.precio }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="duracion" class="form-label">Duración (Minutos)</label>
+                        <input type="number" class="form-control" name="duracion" id="duracion" required value="{{ servicio.duracion }}">
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary btn-save">Guardar cambios</button>
+                        <a href="{{ url_for('admin.servicios') }}" class="btn btn-outline-secondary btn-cancel">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

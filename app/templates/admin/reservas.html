@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Gestión de Reservas{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4" style="color:#d147a3;">📅 Gestión de Reservas</h2>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle text-center reservation-table">
+            <thead class="table-primary">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Horario</th>
+                    <th>Cliente</th>
+                    <th>Manicurista</th>
+                    <th>Servicio</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in reservas %}
+                <tr>
+                    <td>{{ r.date.strftime('%d/%m/%Y') }}</td>
+                    <td>{{ r.start_time.strftime('%H:%M') }} - {{ r.end_time.strftime('%H:%M') }}</td>
+                    <td>{{ r.client.name }}</td>
+                    <td>{{ r.manicurista.name }}</td>
+                    <td>{{ r.service.nombre }}</td>
+                    <td>${{ "{:,.0f}".format(r.service.precio) }}</td>
+                    <td>
+                        <a href="{{ url_for('admin.editar_reserva', id=r.id) }}" class="btn btn-outline-primary btn-sm btn-edit">✏️ Editar</a>
+                        <a href="{{ url_for('admin.eliminar_reserva', id=r.id) }}" 
+                           class="btn btn-outline-danger btn-sm btn-delete"
+                           onclick="return confirm('¿Eliminar esta reserva?');">🗑 Eliminar</a>
+                    </td>
+                    <td>
+                        {% if r.location == 'SPA' %}
+                            <span class="badge bg-info text-dark">En el Spa</span>
+                        {% else %}
+                            <span class="badge bg-secondary">A domicilio</span><br>
+                            <small>{{ r.address }}</small>
+                            <small class="text-muted">+ $20,000 domicilio</small>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7">No hay reservas registradas</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" class="text-end"><strong>Total</strong></td>
+                    <td><strong>${{ "{:,.0f}".format(total) }}</strong></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+{% endblock %}
