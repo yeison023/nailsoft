@@ -7,3 +7,4 @@ PyMySQL
 gunicorn
 python-dotenv
 Jinja2
+psycopg2-binary
